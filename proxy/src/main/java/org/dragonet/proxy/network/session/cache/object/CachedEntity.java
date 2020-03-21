@@ -79,6 +79,9 @@ public class CachedEntity {
         addDefaultMetadata();
     }
 
+    /**
+     * Spawns an entity.
+     */
     public void spawn(ProxySession session) {
         if(spawned) {
             throw new IllegalStateException("Cannot spawn entity that is already spawned");
@@ -94,14 +97,16 @@ public class CachedEntity {
         addEntityPacket.setPosition(getOffsetPosition());
         addEntityPacket.getMetadata().putAll(getMetadata());
 
-        //log.info(getMetadata());
-
         session.sendPacket(addEntityPacket);
         spawned = true;
 
+        // Add the entity to the cache
         session.getEntityCache().getEntities().put(proxyEid, this);
     }
 
+    /**
+     * Despawns an entity.
+     */
     public void despawn(ProxySession session) {
         if(spawned) {
             RemoveEntityPacket removeEntityPacket = new RemoveEntityPacket();
@@ -112,6 +117,9 @@ public class CachedEntity {
         }
     }
 
+    /**
+     * Despawns and removes an entity from the cache.
+     */
     public void destroy(ProxySession session) {
         despawn(session);
         session.getEntityCache().destroyEntity(proxyEid);
@@ -147,6 +155,9 @@ public class CachedEntity {
         this.shouldMove = true;
     }
 
+    /**
+     * Adds the default entity metadata to the entity.
+     */
     private void addDefaultMetadata() {
         flags.setFlag(EntityFlag.HAS_GRAVITY, true);
         flags.setFlag(EntityFlag.HAS_COLLISION, true);

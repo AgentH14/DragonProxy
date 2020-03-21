@@ -24,7 +24,6 @@ import org.dragonet.proxy.remote.RemoteAuthType;
 
 @Getter
 public class DragonConfiguration {
-
     private String locale = "EN";
 
     @JsonProperty("bind-address")
