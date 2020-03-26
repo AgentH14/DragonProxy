@@ -24,6 +24,9 @@ import org.dragonet.proxy.remote.RemoteAuthType;
 
 @Getter
 public class DragonConfiguration {
+    @JsonProperty("config-version")
+    private int configVersion;
+
     private String locale = "EN";
 
     @JsonProperty("bind-address")
@@ -55,6 +58,9 @@ public class DragonConfiguration {
 
     @JsonProperty("fetch-player-skins")
     private boolean fetchPlayerSkins;
+
+    @JsonProperty("enable-commands")
+    private boolean commandsEnabled;
 
     @JsonProperty("thread-pool-size")
     private int threadPoolSize;
